@@ -1,0 +1,12 @@
+# Application dependencies
+
+require:
+    - play
+    - wurfl 0.1
+
+repositories:
+    - localModules:
+       type: local
+       artifact: ${application.path}/../wurfl
+       contains:
+           - wurfl * 

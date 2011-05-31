@@ -1,0 +1,127 @@
+#{extends 'main.html' /}
+#{set title: 'Next page' /}
+
+#{set 'moreStyles'}
+	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/xdemo2.css'}">
+#{/set}
+
+<script type="text/javascript">
+	$(document).ready(function() {	
+		$('#choose-link').click(function() {
+			$('#device-selector-container').toggle()
+		})
+		
+		$('#device-selector-header span').click(function() {
+			$('#device-selector-container').toggle()
+		})
+	})
+</script>
+
+<div id="outer">
+
+	<div id="upbg"></div>
+
+	<div id="inner">
+
+		<div id="header">
+			<h1><span>mobo</span>hobo<sup>1.0</sup></h1>
+		</div>
+	
+		<div id="splash"></div>
+	
+		<div id="menu">
+			<ul>
+				<li class="first"><a href="#">Home</a></li>
+				<li><a href="#">Support</a></li>
+				<li><a href="#">Products</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+
+		</div>
+
+		<div id="primarycontent">
+		
+			<!-- primary content start -->
+		
+			<div class="post">
+				<div class="header">
+					<h3>Vivamus tortor sed aenean</h3>
+					<div class="date">July 31, 2006</div>
+				</div>
+				<div class="content">
+					<p>Volutpat at varius sed sollicitudin et, arcu. Vivamus viverra. Nullam turpis. Vestibulum sed etiam. Lorem ipsum sit amet dolore. Nulla facilisi. Sed tortor. Aenean felis. Quisque eros. Cras lobortis commodo metus. Vestibulum vel purus. In eget odio in sapien adipiscing blandit. Quisque augue tortor, facilisis sit amet, aliquam, suscipit vitae, cursus sed, arcu lorem ipsum dolor sit amet.</p>
+					<p>Fermentum at, varius pretium, elit. Mauris egestas scelerisque nunc. Mauris non ligula quis wisi laoreet malesuada. In commodo. Maecenas lobortis cursus dolor.</p>
+				</div>			
+				<div class="footer">
+					<ul>
+						<li class="printerfriendly"><a href="#">Printer Friendly</a></li>
+						<li class="comments"><a href="#">Comments (18)</a></li>
+						<li class="readmore"><a href="#">Read more</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="post">
+				<div class="header">
+					<h3>Vivamus tortor sed aenean</h3>
+					<div class="date">July 31, 2006</div>
+				</div>
+				<div class="content">
+					<p>Volutpat at varius sed sollicitudin et, arcu. Vivamus viverra. Nullam turpis. Vestibulum sed etiam. Lorem ipsum sit amet dolore. Nulla facilisi. Sed tortor. Aenean felis. Quisque eros. Cras lobortis commodo metus. Vestibulum vel purus. In eget odio in sapien adipiscing blandit. Quisque augue tortor, facilisis sit amet, aliquam, suscipit vitae, cursus sed, arcu lorem ipsum dolor sit amet.</p>
+					<p>Fermentum at, varius pretium, elit. Mauris egestas scelerisque nunc. Mauris non ligula quis wisi laoreet malesuada. In commodo. Maecenas lobortis cursus dolor.</p>
+				</div>			
+				<div class="footer">
+					<ul>
+						<li class="printerfriendly"><a href="#">Printer Friendly</a></li>
+						<li class="comments"><a href="#">Comments (18)</a></li>
+						<li class="readmore"><a href="#">Read more</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- primary content end -->
+	
+		</div>
+		
+		<div id="secondarycontent">
+
+			<!-- secondary content start -->
+		
+			<h3>Your Device</h3>
+			<div id="device-context">
+				<span id="choose"><a id="choose-link" href="#">Choose another</a></span>
+			</div>
+			
+			<h3>Latest FAQs</h3>
+			<div class="content">
+				<ul class="linklist">
+					<li class="first"><a href="#"></a></li>
+					<li><a href="#">Dignissim nec augue (14)</a></li>
+					<li><a href="#">Nunc ante elit nulla (83)</a></li>
+					<li><a href="#">Aliquam suscipit (74)</a></li>
+					<li><a href="#">Cursus sed arcu sed (14)</a></li>
+					<li><a href="#">Eu ante cras at risus (24)</a></li>
+					<li><a href="#">Donec mollis dolore (39)</a></li>
+					<li><a href="#">Aliquam suscipit (74)</a></li>
+				</ul>
+			</div>
+
+			<!-- secondary content end -->
+
+		</div>
+
+		<div id="device-selector-container">
+			<div id="device-selector-header">Select a device:<span>Close</span></div>	
+			<div id="device-selector">
+			</div>
+		</div>
+		
+		<div id="footer">
+		
+			&copy; My Website. All rights reserved. Design by <a href="http://www.nodethirtythree.com/">NodeThirtyThree</a>.
+		
+		</div>
+
+	</div>
+
+</div>

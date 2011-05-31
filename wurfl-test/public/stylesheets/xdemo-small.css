@@ -1,0 +1,20 @@
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+	background: #F9F9F7 url('/public/images/a1.gif') repeat-x;
+	font-size: 15px;
+	font-family: "trebuchet ms", helvetica, sans-serif;
+	color: #8C8C73;
+	line-height: 18px;
+}
+
+#header {
+	background: #FF7800 url('/public/images/a8.gif');
+	width: 300px;
+	height: 60px;
+	color: #fff;
+	padding-left: 20px;
+}
