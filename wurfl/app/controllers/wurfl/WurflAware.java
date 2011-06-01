@@ -1,6 +1,6 @@
 package controllers.wurfl;
 
-import models.wurfl.MobiDevice;
+import models.wurfl.DeviceDecorator;
 import net.sourceforge.wurfl.core.DefaultDeviceProvider;
 import net.sourceforge.wurfl.core.DefaultWURFLManager;
 import net.sourceforge.wurfl.core.DefaultWURFLService;
@@ -33,9 +33,10 @@ public class WurflAware extends Controller {
 
 			if(device.getCapability("is_wireless_device").equals("true")) {
 				request.format = "mobi";
-				renderArgs.put("device", new MobiDevice(device));
+				response.contentType = "text/html";
+				renderArgs.put("device", new DeviceDecorator(device));
 			}
-			response.contentType = "text/html; charset=" + Http.Response.current().encoding;
+
 		}
 	}
 }

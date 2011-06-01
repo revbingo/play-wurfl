@@ -1,0 +1,4 @@
+- handle missing wurfl file
+- make wurfl.xml location configurable
+- dynamically add methods to DeviceDecorator
+- use xhtml/chtml/wap dependent on device

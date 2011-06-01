@@ -2,16 +2,20 @@ package models.wurfl;
 
 import net.sourceforge.wurfl.core.Device;
 
-public class MobiDevice {
+public class DeviceDecorator {
 
 	private Device device;
 	public String modelName;
 
-	public MobiDevice(Device device) {
+	public DeviceDecorator(Device device) {
 		this.device = device;
 	}
 
 	public String getModelName() {
 		return device.getCapability("model_name");
+	}
+
+	public Device getDevice() {
+		return device;
 	}
 }
