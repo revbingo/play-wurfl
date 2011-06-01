@@ -15,8 +15,8 @@
 			<h1><span>mobo</span>hobo<sup>1.0</sup>  <sup>mobile!</sup></h1>
 		</div>
 
-		DEBUG: ${device.getDevice().getCapability("model_name")} :DEBUG
-		You're browsing on a ${device.model_name} with ${device.model_extra_info}
+		DEBUG: ${device.model_name} :DEBUG
+		You're browsing on a ${device.brand_name} ${device.model_name} ${device.model_extra_info}
 			
 		<div id="splash"></div>
 	
