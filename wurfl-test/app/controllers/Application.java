@@ -2,9 +2,9 @@ package controllers;
 
 import play.mvc.Controller;
 import play.mvc.With;
-import controllers.mobi.MobiAware;
+import controllers.wurfl.WurflAware;
 
-@With(MobiAware.class)
+@With(WurflAware.class)
 public class Application extends Controller {
 
     public static void index() {

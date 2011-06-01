@@ -1,6 +1,6 @@
-package controllers.mobi;
+package controllers.wurfl;
 
-import models.mobi.MobiDevice;
+import models.wurfl.MobiDevice;
 import net.sourceforge.wurfl.core.DefaultDeviceProvider;
 import net.sourceforge.wurfl.core.DefaultWURFLManager;
 import net.sourceforge.wurfl.core.DefaultWURFLService;
@@ -15,7 +15,7 @@ import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Http;
 
-public class MobiAware extends Controller {
+public class WurflAware extends Controller {
 
 	private static WURFLManager manager;
 

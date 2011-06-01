@@ -1,4 +1,4 @@
-package models.mobi;
+package models.wurfl;
 
 import net.sourceforge.wurfl.core.Device;
 
