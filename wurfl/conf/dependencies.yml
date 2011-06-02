@@ -1,5 +1,4 @@
 self: play -> wurfl 0.1
 
 require:
-    - play
-    - wurfl 1.2.2
+    - play 1.2

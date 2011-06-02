@@ -1,3 +1,6 @@
 **/.classpath
-wurfl
+**/.project
+**/.settings
+**/eclipse
+**/modules
 **/tmp

@@ -28,13 +28,18 @@ def install(app):
     xmlfile = wurfl_zip.open('wurfl.xml')
     
     outputfilename = os.path.join(app.path, 'conf', 'wurfl.xml')
+    fileexisted = False
     if(os.path.exists(outputfilename)):
-        print "~ Replacing existing wurfl.xml"
+       fileexisted = True 
         
     outputfile = open(outputfilename, 'wb')
     
     outputfile.write(xmlfile.read())
     outputfile.close()
+    if fileexisted:
+        print "~ Replacing existing conf/wurfl.xml"
+    else:
+        print "~ Created conf/wurfl.xml"
 
 # This will be executed before any command (new, run...)
 def before(**kargs):
