@@ -22,7 +22,53 @@ import play.vfs.VirtualFile;
 
 public class WurflEnhancer extends Enhancer {
 
-	List<String> properties = new ArrayList<String>();
+	List<Property> properties = new ArrayList<Property>();
+
+	private abstract class Property {
+		public String name;
+		public String getDelegateMethod() {
+			return String.format("public " + getReturnType() + " get%s() {  " + getMethodBody("device.getCapability(\"%s\")") + " }", StringUtils.capitalize(name), name);
+		}	
+		abstract String getMethodBody(String inner);
+		abstract String getReturnType();
+	}
+	
+	private class StringProperty extends Property {
+		@Override
+		public String getMethodBody(String inner) {
+			return "return " + inner + ";";
+		}
+		
+		@Override
+		public String getReturnType() {
+			return String.class.getSimpleName();	
+		}
+	}
+	
+	private class IntProperty extends Property {
+		@Override
+		public String getMethodBody(String inner) {
+			return "return Integer.parseInt(" + inner + ");";
+		}
+
+		@Override
+		public String getReturnType() {
+			return "int";
+		}	
+	}
+	
+	private class BooleanProperty extends Property {
+
+		@Override
+		public String getMethodBody(String inner) {
+			return "return Boolean.parseBoolean(" + inner + ");";
+		}
+
+		@Override
+		public String getReturnType() {
+			return "boolean";
+		}
+	}
 
 	public WurflEnhancer() {
 		VirtualFile wurflFile = Play.getVirtualFile("conf/wurfl.xml");
@@ -39,7 +85,20 @@ public class WurflEnhancer extends Enhancer {
 		}
 
 		for(Node capabilityNode : XPath.selectNodes("group/capability", genericDeviceNode)) {
-			String property = ((Element) capabilityNode).getAttribute("name");
+			String propertyName = ((Element) capabilityNode).getAttribute("name");
+			String defaultValue = ((Element) capabilityNode).getAttribute("value");
+			Property property = null;
+			if(defaultValue.equalsIgnoreCase("true") || defaultValue.equalsIgnoreCase("false")) {
+				property = new BooleanProperty();
+			} else {
+				try {
+					Integer.parseInt(defaultValue);
+					property = new IntProperty();
+				} catch(NumberFormatException e) {
+						property = new StringProperty();
+				}
+			}
+			property.name = propertyName;
 			properties.add(property);
 		}
 	}
@@ -48,18 +107,22 @@ public class WurflEnhancer extends Enhancer {
 	public void enhanceThisClass(ApplicationClass applicationClass) throws Exception {
 		CtClass ctClass = makeClass(applicationClass);
 
-		for(String property : properties) {
+		for(Property property : properties) {
 
-			CtField field = CtField.make("public String " + property + ";", ctClass);
+			CtField field = CtField.make("public String " + property.name + ";", ctClass);
 			ctClass.addField(field);
 
-			CtMethod method = CtMethod.make(String.format("public String get%s() {  return device.getCapability(\"%s\"); }", StringUtils.capitalize(property), property), ctClass);
+			CtMethod method = CtMethod.make(property.getDelegateMethod(), ctClass);
 			ctClass.addMethod(method);
 		}
 
 		applicationClass.enhancedByteCode = ctClass.toBytecode();
 		ctClass.defrost();
-
+		
 		new PropertiesEnhancer().enhanceThisClass(applicationClass);
+	}
+	
+	public static void main(String[] args) {
+		Integer.parseInt("asd");
 	}
 }

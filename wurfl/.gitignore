@@ -1,3 +1,5 @@
 commands.pyc
 lib/play-wurfl.jar
+!lib/wurfl*.jar
+lib/*.jar
 dist

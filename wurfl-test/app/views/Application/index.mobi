@@ -18,6 +18,18 @@
 		DEBUG: ${device.model_name} :DEBUG
 		You're browsing on a ${device.brand_name} ${device.model_name} ${device.model_extra_info}
 			
+		#{if device.max_data_rate > 500}
+			${device.max_data_rate} data rate
+		#{/if}
+		#{else}
+			Your max data rate was below 500 (${device.max_data_rate})
+		#{/else}
+		#{if device.ajax_support_javascript}
+			<h3>You support javascript</h3>
+		#{/if}
+		#{else}
+			<h3>booo, you don't support javascript</h3>
+		#{/else}
 		<div id="splash"></div>
 	
 		<div id="menu">
