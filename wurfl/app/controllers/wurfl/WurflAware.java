@@ -14,18 +14,25 @@ import play.Play;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Http;
+import play.vfs.VirtualFile;
 
 public class WurflAware extends Controller {
 
 	private static WURFLManager manager;
+	private static boolean haveWurflFile = false;
 
 	static {
-		WURFLModel model = new DefaultWURFLModel(new XMLResource(Play.getVirtualFile("conf/wurfl.xml").getRealFile()));
-		manager = new DefaultWURFLManager(new DefaultWURFLService(new MatcherManager(model), new DefaultDeviceProvider(model)));
+		VirtualFile wurflFile = Play.getVirtualFile("conf/wurfl.xml");
+		if(haveWurflFile = (wurflFile != null && wurflFile.exists())) {
+			WURFLModel model = new DefaultWURFLModel(new XMLResource(Play.getVirtualFile("conf/wurfl.xml").getRealFile()));
+			manager = new DefaultWURFLManager(new DefaultWURFLService(new MatcherManager(model), new DefaultDeviceProvider(model)));
+		}
 	}
 
 	@Before
 	public static void checkUAHeader() {
+		if(!haveWurflFile) return;
+
 		Http.Header uaHeader = request.headers.get("user-agent");
 		if(uaHeader != null) {
 			String ua = uaHeader.value();

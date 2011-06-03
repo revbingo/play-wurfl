@@ -12,6 +12,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import play.Logger;
 import play.Play;
 import play.classloading.ApplicationClasses.ApplicationClass;
 import play.classloading.enhancers.Enhancer;
@@ -28,23 +29,23 @@ public class WurflEnhancer extends Enhancer {
 		public String name;
 		public String getDelegateMethod() {
 			return String.format("public " + getReturnType() + " get%s() {  " + getMethodBody("device.getCapability(\"%s\")") + " }", StringUtils.capitalize(name), name);
-		}	
+		}
 		abstract String getMethodBody(String inner);
 		abstract String getReturnType();
 	}
-	
+
 	private class StringProperty extends Property {
 		@Override
 		public String getMethodBody(String inner) {
 			return "return " + inner + ";";
 		}
-		
+
 		@Override
 		public String getReturnType() {
-			return String.class.getSimpleName();	
+			return String.class.getSimpleName();
 		}
 	}
-	
+
 	private class IntProperty extends Property {
 		@Override
 		public String getMethodBody(String inner) {
@@ -54,9 +55,9 @@ public class WurflEnhancer extends Enhancer {
 		@Override
 		public String getReturnType() {
 			return "int";
-		}	
+		}
 	}
-	
+
 	private class BooleanProperty extends Property {
 
 		@Override
@@ -72,15 +73,17 @@ public class WurflEnhancer extends Enhancer {
 
 	public WurflEnhancer() {
 		VirtualFile wurflFile = Play.getVirtualFile("conf/wurfl.xml");
-		if(!wurflFile.exists()) {
-			System.out.println("~ Warning: conf/wurfl.xml does not exist, not enhancing");
+		if(wurflFile == null || !wurflFile.exists()) {
+			Logger.warn("WARNING: conf/wurfl.xml does not exist, not enhancing");
+			Logger.warn("Try play wurfl:install to install the file");
 			return;
 		}
 
 		Document document = XML.getDocument(Play.getVirtualFile("conf/wurfl.xml").getRealFile());
 		Node genericDeviceNode = XPath.selectNode("/wurfl/devices/device[@id='generic']", document);
 		if(genericDeviceNode == null) {
-			System.out.println("~ Warning: cannot get generic device node from wurfl.xml, not enhancing");
+			Logger.warn("WARNING: cannot get generic device node from wurfl.xml, not enhancing");
+			Logger.warn("Try play wurfl:install to install the file");
 			return;
 		}
 
@@ -118,11 +121,7 @@ public class WurflEnhancer extends Enhancer {
 
 		applicationClass.enhancedByteCode = ctClass.toBytecode();
 		ctClass.defrost();
-		
+
 		new PropertiesEnhancer().enhanceThisClass(applicationClass);
-	}
-	
-	public static void main(String[] args) {
-		Integer.parseInt("asd");
 	}
 }
