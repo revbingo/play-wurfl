@@ -1,3 +1,4 @@
-- handle missing wurfl file
 - make wurfl.xml location configurable
 - use xhtml/chtml/wap dependent on device
+- using request.format is not ideal
+- configuration option to just do redirect instead
