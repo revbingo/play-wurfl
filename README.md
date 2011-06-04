@@ -23,8 +23,8 @@ Querying wurfl capabilities
 
 When rendering for mobile devices, an implicit object "device" is available. This allows you to query for Wurfl capabilities simply as fields on that object e.g. ${device.model\_name}. Capabilities are dynamically discovered from the wurfl.xml file at application startup. Properties are typed as either String, int or boolean, so that you can use them in a simple way. For instance, for numeric properties, you can use mathematical operators e.g. 
 
-    Screen area : ${device.physical\_screen\_height * device.physical\_screen\_width}
+    Screen area : ${device.physical_screen_height * device.physical_screen_width}
 
 For boolean properties you can do simple switches e.g. 
 
-    #{if device.ajax\_supports\_javascript}
+    #{if device.ajax_supports_javascript}
