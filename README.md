@@ -1,4 +1,4 @@
-Pay-Wurfl
+Play-Wurfl
 ----------
 
 This is a Play! framework module for detecting mobile devices using Wurfl.  It currently has the following features:
